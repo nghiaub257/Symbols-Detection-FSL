@@ -41,14 +41,23 @@ class COCOEvaluator(DatasetEvaluator):
             self._metadata.json_file = cache_path
         self._is_splits = "all" in dataset_name or "base" in dataset_name \
             or "novel" in dataset_name
-        self._base_classes = [
-            8, 10, 11, 13, 14, 15, 22, 23, 24, 25, 27, 28, 31, 32, 33, 34, 35,
-            36, 37, 38, 39, 40, 41, 42, 43, 46, 47, 48, 49, 50, 51, 52, 53, 54,
-            55, 56, 57, 58, 59, 60, 61, 65, 70, 73, 74, 75, 76, 77, 78, 79, 80,
-            81, 82, 84, 85, 86, 87, 88, 89, 90,
-        ]
-        self._novel_classes = [1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21,
-                               44, 62, 63, 64, 67, 72]
+        self._base_classes = getattr(self._metadata, "base_dataset_id_to_contiguous_id", None)
+        if self._base_classes:
+            self._base_classes = list(self._base_classes.keys())
+        else:
+            self._base_classes = [
+                8, 10, 11, 13, 14, 15, 22, 23, 24, 25, 27, 28, 31, 32, 33, 34, 35,
+                36, 37, 38, 39, 40, 41, 42, 43, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                55, 56, 57, 58, 59, 60, 61, 65, 70, 73, 74, 75, 76, 77, 78, 79, 80,
+                81, 82, 84, 85, 86, 87, 88, 89, 90,
+            ]
+
+        self._novel_classes = getattr(self._metadata, "novel_dataset_id_to_contiguous_id", None)
+        if self._novel_classes:
+            self._novel_classes = list(self._novel_classes.keys())
+        else:
+            self._novel_classes = [1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21,
+                                   44, 62, 63, 64, 67, 72]
 
         json_file = self._metadata.json_file
         with contextlib.redirect_stdout(io.StringIO()):
