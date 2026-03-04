@@ -27,6 +27,7 @@ class DetectionCheckpointer(Checkpointer):
             if "model" in data and "__author__" in data:
                 # file is in Detectron2 model zoo format
                 self.logger.info("Reading a file from '{}'".format(data["__author__"]))
+                data["matching_heuristics"] = True
                 return data
             else:
                 # assume file is from Caffe2 / Detectron1 model zoo
