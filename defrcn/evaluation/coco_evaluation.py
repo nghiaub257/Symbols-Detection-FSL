@@ -59,7 +59,7 @@ class COCOEvaluator(DatasetEvaluator):
             self._novel_classes = [1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21,
                                    44, 62, 63, 64, 67, 72]
 
-        json_file = self._metadata.json_file
+        json_file = PathManager.get_local_path(self._metadata.json_file)
         with contextlib.redirect_stdout(io.StringIO()):
             self._coco_api = COCO(json_file)
         self._do_evaluation = "annotations" in self._coco_api.dataset
