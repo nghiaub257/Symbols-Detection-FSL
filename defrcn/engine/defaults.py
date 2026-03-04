@@ -375,7 +375,7 @@ class DefaultTrainer(SimpleTrainer):
             # It may not always print what you want to see, since it prints "common" metrics only.
             CommonMetricPrinter(self.max_iter),
             JSONWriter(os.path.join(self.cfg.OUTPUT_DIR, "metrics.json")),
-            TensorboardXWriter(self.cfg.OUTPUT_DIR),
+            # TensorboardXWriter(self.cfg.OUTPUT_DIR),
         ]
 
     def train(self):
