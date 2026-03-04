@@ -1,2 +1,22 @@
+# Core dependencies
+torch
+torchvision
+cython
+
+# Detectron2 dependencies
+fvcore>=0.1.5
+iopath>=0.1.7
+pycocotools
+matplotlib
+termcolor
+yacs
+tabulate
+cloudpickle
+tqdm
+pyyaml>=5.1
+pillow
+
+# Additional dependencies for DeFRCN/Symbols project
 opencv-python
-sklearn
+scikit-learn
+filterpy
