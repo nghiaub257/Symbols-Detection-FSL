@@ -1,22 +1,26 @@
-# Core dependencies
-torch
-torchvision
+# Core
+torch>=2.0.0
+torchvision>=0.15.0
 cython
 
-# Detectron2 dependencies
+# Detectron2 dependencies (Pinned for stability)
 fvcore>=0.1.5
 iopath>=0.1.7
-pycocotools
-matplotlib
-termcolor
-yacs
+pycocotools>=2.0.2
+matplotlib>=3.0.0
+termcolor>=1.1.0
+yacs>=0.1.8
 tabulate
 cloudpickle
 tqdm
 pyyaml>=5.1
-pillow
+pillow>=7.1.2
 
-# Additional dependencies for DeFRCN/Symbols project
-opencv-python
-scikit-learn
-filterpy
+# Additional dependencies for Symbols project
+opencv-python>=4.5.0
+scikit-learn>=0.24.0
+filterpy>=1.4.5
+
+# NOTE for Detectron2:
+# If you are on PyTorch 2.9 (Kaggle), Detectron2 MUST be installed from source:
+# !pip install 'git+https://github.com/facebookresearch/detectron2.git'
