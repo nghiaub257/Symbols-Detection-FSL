@@ -1,6 +1,7 @@
 import os
 from .meta_voc import register_meta_voc
 from .meta_coco import register_meta_coco
+from .meta_symbols import register_meta_symbols
 from .builtin_meta import _get_builtin_metadata
 from detectron2.data import DatasetCatalog, MetadataCatalog
 
