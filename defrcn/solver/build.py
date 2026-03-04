@@ -124,7 +124,11 @@ def build_optimizer(cfg: CfgNode, model: torch.nn.Module) -> torch.optim.Optimiz
                 # hyperparameters are by default exactly the same as for regular
                 # weights.
                 lr = cfg.SOLVER.BASE_LR * cfg.SOLVER.BIAS_LR_FACTOR
-                weight_decay = cfg.SOLVER.WEIGHT_DECAY_BIAS
+                # WEIGHT_DECAY_BIAS can be None in newer Detectron2 configs
+                # (meaning "inherit from WEIGHT_DECAY"). Guard against None so
+                # PyTorch 2.x SGD doesn't receive alpha=None.
+                wd_bias = cfg.SOLVER.WEIGHT_DECAY_BIAS
+                weight_decay = wd_bias if wd_bias is not None else cfg.SOLVER.WEIGHT_DECAY
 
             params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
 
