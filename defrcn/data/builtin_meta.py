@@ -244,6 +244,22 @@ def _get_voc_fewshot_instances_meta():
     return ret
 
 
+def _get_symbols_fewshot_instances_meta():
+    all_cats = [{"id": i, "name": f"class_{i+1}"} for i in range(32)]
+    novel_ids = [5, 10, 15, 20]
+    novel_cats = [c for c in all_cats if c["id"] in novel_ids]
+    base_cats = [c for c in all_cats if c["id"] not in novel_ids]
+    ret = {
+        "thing_dataset_id_to_contiguous_id": {c["id"]: i for i, c in enumerate(all_cats)},
+        "thing_classes": [c["name"] for c in all_cats],
+        "novel_dataset_id_to_contiguous_id": {c["id"]: i for i, c in enumerate(novel_cats)},
+        "novel_classes": [c["name"] for c in novel_cats],
+        "base_dataset_id_to_contiguous_id": {c["id"]: i for i, c in enumerate(base_cats)},
+        "base_classes": [c["name"] for c in base_cats],
+    }
+    return ret
+
+
 def _get_builtin_metadata(dataset_name):
     if dataset_name == "coco":
         return _get_coco_instances_meta()
@@ -251,4 +267,6 @@ def _get_builtin_metadata(dataset_name):
         return _get_coco_fewshot_instances_meta()
     elif dataset_name == "voc_fewshot":
         return _get_voc_fewshot_instances_meta()
+    elif dataset_name == "symbols_fewshot":
+        return _get_symbols_fewshot_instances_meta()
     raise KeyError("No built-in metadata for dataset {}".format(dataset_name))

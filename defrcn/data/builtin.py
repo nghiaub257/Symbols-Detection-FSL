@@ -92,5 +92,25 @@ def register_all_voc(root="datasets"):
         MetadataCatalog.get(name).evaluator_type = "pascal_voc"
 
 
+# -------- SYMBOLS -------- #
+def register_all_symbols(root="datasets"):
+    METASPLITS = [
+        ("symbols_train_all", "symbols/images/train", "symbols/annotations/symbols_train.json"),
+        ("symbols_train_base", "symbols/images/train", "symbols/annotations/symbols_train.json"),
+        ("symbols_val_all", "symbols/images/val", "symbols/annotations/symbols_val.json"),
+        ("symbols_val_base", "symbols/images/val", "symbols/annotations/symbols_val.json"),
+        ("symbols_val_novel", "symbols/images/val", "symbols/annotations/symbols_val.json"),
+        ("symbols_train_1shot_seed0", "symbols/images/train", "symbols/annotations/symbols_1shot_seed0.json"),
+        ("symbols_train_5shot_seed0", "symbols/images/train", "symbols/annotations/symbols_5shot_seed0.json"),
+    ]
+    for name, imgdir, annofile in METASPLITS:
+        register_meta_symbols(
+            name,
+            _get_builtin_metadata("symbols_fewshot"),
+            os.path.join(root, imgdir),
+            os.path.join(root, annofile),
+        )
+
 register_all_coco()
 register_all_voc()
+register_all_symbols()

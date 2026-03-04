@@ -92,6 +92,12 @@ if __name__ == '__main__':
         TAR_SIZE = 80
     elif args.dataset == 'voc':
         TAR_SIZE = 20
+    elif args.dataset == 'symbols':
+        NOVEL_CLASSES = [5, 10, 15, 20]
+        BASE_CLASSES = [i for i in range(32) if i not in NOVEL_CLASSES]
+        ALL_CLASSES = sorted(BASE_CLASSES + NOVEL_CLASSES)
+        IDMAP = {v: i for i, v in enumerate(ALL_CLASSES)}
+        TAR_SIZE = 4
     else:
         raise NotImplementedError
 
