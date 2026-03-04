@@ -15,8 +15,8 @@ DATASETS:
   TRAIN: ('symbols_train_base',)
   TEST: ('symbols_val_base',)
 SOLVER:
-  IMS_PER_BATCH: 16
-  BASE_LR: 0.001
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.00025
   STEPS: (15000, 18000)
   MAX_ITER: 20000
   CHECKPOINT_PERIOD: 5000

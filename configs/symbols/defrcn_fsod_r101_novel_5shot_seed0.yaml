@@ -20,8 +20,8 @@ DATASETS:
   TRAIN: ('symbols_train_5shot_seed0',)
   TEST: ('symbols_val_novel',)
 SOLVER:
-  IMS_PER_BATCH: 16
-  BASE_LR: 0.01
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.0025
   STEPS: (400,)
   MAX_ITER: 500
   CHECKPOINT_PERIOD: 1000
