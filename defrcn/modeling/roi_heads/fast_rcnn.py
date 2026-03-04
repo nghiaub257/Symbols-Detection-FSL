@@ -5,7 +5,11 @@ import logging
 import numpy as np
 from torch import nn
 from torch.nn import functional as F
-from fvcore.nn import smooth_l1_loss
+try:
+    from fvcore.nn import smooth_l1_loss
+except ImportError:
+    def smooth_l1_loss(input, target, beta, reduction="mean"):
+        return F.smooth_l1_loss(input, target, beta=beta, reduction=reduction)
 from detectron2.utils.registry import Registry
 from detectron2.layers import batched_nms, cat
 from detectron2.structures import Boxes, Instances

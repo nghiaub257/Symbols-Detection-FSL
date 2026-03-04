@@ -4,7 +4,10 @@ import time
 import torch
 import itertools
 import detectron2.utils.comm as comm
-from fvcore.common.file_io import PathManager
+try:
+    from iopath.common.file_io import PathManager
+except ImportError:
+    from fvcore.common.file_io import PathManager
 from detectron2.config import global_cfg
 from detectron2.engine.train_loop import HookBase
 from detectron2.evaluation.testing import flatten_results_dict

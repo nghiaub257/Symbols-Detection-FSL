@@ -9,7 +9,10 @@ import contextlib
 import numpy as np
 from tabulate import tabulate
 from collections import OrderedDict
-from fvcore.common.file_io import PathManager
+try:
+    from iopath.common.file_io import PathManager
+except ImportError:
+    from fvcore.common.file_io import PathManager
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 from detectron2.structures import BoxMode

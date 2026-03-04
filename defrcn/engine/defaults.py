@@ -3,7 +3,10 @@ import torch
 import logging
 import argparse
 from collections import OrderedDict
-from fvcore.common.file_io import PathManager
+try:
+    from iopath.common.file_io import PathManager
+except ImportError:
+    from fvcore.common.file_io import PathManager
 from fvcore.nn.precise_bn import get_bn_modules
 from torch.nn.parallel import DistributedDataParallel
 from detectron2.utils import comm

@@ -4,7 +4,10 @@ import contextlib
 import numpy as np
 from pycocotools.coco import COCO
 from detectron2.structures import BoxMode
-from fvcore.common.file_io import PathManager
+try:
+    from iopath.common.file_io import PathManager
+except ImportError:
+    from fvcore.common.file_io import PathManager
 from detectron2.data import DatasetCatalog, MetadataCatalog
 
 
