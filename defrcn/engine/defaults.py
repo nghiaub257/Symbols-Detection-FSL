@@ -88,7 +88,7 @@ def default_setup(cfg, args):
     """
     output_dir = cfg.OUTPUT_DIR
     if comm.is_main_process() and output_dir:
-        PathManager.mkdirs(output_dir)
+        os.makedirs(output_dir, exist_ok=True)
 
     rank = comm.get_rank()
     setup_logger(output_dir, distributed_rank=rank, name="fvcore")
@@ -108,7 +108,7 @@ def default_setup(cfg, args):
         logger.info(
             "Contents of args.config_file={}:\n{}".format(
                 args.config_file,
-                PathManager.open(args.config_file, "r").read(),
+                open(args.config_file, "r").read(),
             )
         )
 
@@ -118,7 +118,7 @@ def default_setup(cfg, args):
         # Note: some of our scripts may expect the existence of
         # config.yaml in output directory
         path = os.path.join(output_dir, "config.yaml")
-        with PathManager.open(path, "w") as f:
+        with open(path, "w") as f:
             f.write(cfg.dump())
         logger.info("Full config saved to {}".format(os.path.abspath(path)))
 

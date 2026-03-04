@@ -50,7 +50,7 @@ class COCOEvaluator(DatasetEvaluator):
         self._novel_classes = [1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21,
                                44, 62, 63, 64, 67, 72]
 
-        json_file = PathManager.get_local_path(self._metadata.json_file)
+        json_file = self._metadata.json_file
         with contextlib.redirect_stdout(io.StringIO()):
             self._coco_api = COCO(json_file)
         self._do_evaluation = "annotations" in self._coco_api.dataset
@@ -91,10 +91,10 @@ class COCOEvaluator(DatasetEvaluator):
             return {}
 
         if self._output_dir:
-            PathManager.mkdirs(self._output_dir)
+            os.makedirs(self._output_dir, exist_ok=True)
             file_path = os.path.join(
                 self._output_dir, "instances_predictions.pth")
-            with PathManager.open(file_path, "wb") as f:
+            with open(file_path, "wb") as f:
                 torch.save(self._predictions, f)
 
         self._results = OrderedDict()
@@ -123,7 +123,7 @@ class COCOEvaluator(DatasetEvaluator):
         if self._output_dir:
             file_path = os.path.join(self._output_dir, "coco_instances_results.json")
             self._logger.info("Saving results to {}".format(file_path))
-            with PathManager.open(file_path, "w") as f:
+            with open(file_path, "w") as f:
                 f.write(json.dumps(self._coco_results))
                 f.flush()
 

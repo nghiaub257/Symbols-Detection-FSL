@@ -64,7 +64,7 @@ class EvalHookDeFRCN(HookBase):
                 os.path.join(self.cfg.OUTPUT_DIR, 'inference'), exist_ok=True)
             output_file = 'res_final.json' if is_final else \
                 'iter_{:07d}.json'.format(self.trainer.iter)
-            with PathManager.open(os.path.join(self.cfg.OUTPUT_DIR, 'inference',
+            with open(os.path.join(self.cfg.OUTPUT_DIR, 'inference',
                                                output_file), 'w') as fp:
                 json.dump(results, fp)
 

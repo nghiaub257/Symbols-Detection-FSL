@@ -23,7 +23,7 @@ def load_coco_json(json_file, image_root, metadata, dataset_name):
         split_dir = os.path.join('datasets', 'cocosplit', 'seed{}'.format(seed))
         for idx, cls in enumerate(metadata["thing_classes"]):
             json_file = os.path.join(split_dir, "full_box_{}shot_{}_trainval.json".format(shot, cls))
-            json_file = PathManager.get_local_path(json_file)
+            json_file = json_file
             with contextlib.redirect_stdout(io.StringIO()):
                 coco_api = COCO(json_file)
             img_ids = sorted(list(coco_api.imgs.keys()))
@@ -38,7 +38,7 @@ def load_coco_json(json_file, image_root, metadata, dataset_name):
             imgs.append(imgid2info[img_id][0])
             anns.append(imgid2info[img_id][1])
     else:
-        json_file = PathManager.get_local_path(json_file)
+        json_file = json_file
         with contextlib.redirect_stdout(io.StringIO()):
             coco_api = COCO(json_file)
         # sort indices for reproducible results
