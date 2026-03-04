@@ -8,7 +8,7 @@ class GradientDecoupleLayer(Function):
     @staticmethod
     def forward(ctx, x, _lambda):
         ctx._lambda = _lambda
-        return x
+        return x.view_as(x)
 
     @staticmethod
     def backward(ctx, grad_output):
