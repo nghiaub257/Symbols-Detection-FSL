@@ -1,13 +1,7 @@
 import pickle
 import detectron2.utils.comm as comm
-try:
-    from iopath.common.file_io import PathManager
-except ImportError:
-    from fvcore.common.file_io import PathManager
-try:
-    from iopath.common.checkpoint import Checkpointer
-except ImportError:
-    from fvcore.common.checkpoint import Checkpointer
+from detectron2.utils.file_io import PathManager
+from detectron2.checkpoint import Checkpointer
 from detectron2.checkpoint.c2_model_loading import align_and_update_state_dicts
 
 
