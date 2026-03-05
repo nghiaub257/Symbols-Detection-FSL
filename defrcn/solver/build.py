@@ -44,7 +44,8 @@ def _generate_optimizer_class_with_gradient_clipping(
     def optimizer_wgc_step(self, closure=None):
         for group in self.param_groups:
             for p in group["params"]:
-                gradient_clipper(p)
+                if p.grad is not None:
+                    gradient_clipper(p)
         super(type(self), self).step(closure)
 
     OptimizerWithGradientClip = type(

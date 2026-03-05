@@ -26,4 +26,6 @@ SOLVER:
     ENABLED: True
     CLIP_TYPE: "value"
     CLIP_VALUE: 1.0
+TEST:
+  EVAL_PERIOD: 500
 OUTPUT_DIR: "output/symbols/base_training"
